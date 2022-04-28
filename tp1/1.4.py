@@ -9,11 +9,11 @@ i_fuente = 10
 
 v1 = 123.38
 u_i_v1 = 50e-3
-u_j_voltimetro_1 = (0.04/100)*v1 + 000.01 # Escala en 400V, 1 dígito = 000.01
+u_j_voltimetro_1 = (0.04/100 + 1/12338)*v1 # Escala en 400V, 1 dígito = 000.01
 
 v2 = 346.42e-3
 u_i_v2= 0.50e-3
-u_j_voltimetro_2 = (0.04/100)*v2 + 000.01e-3 #Escala en 400mv, 1 digito = 000.01e-3
+u_j_voltimetro_2 = (0.04/100 + 1/34642)*v2 #Escala en 400mv, 1 digito = 000.01e-3
 
 
 ###############################################################################
@@ -42,7 +42,9 @@ i_medida = v2/r
 di_dv = 1/r
 di_dr = -v2/r**2
 
-u_c_i = np.sqrt((di_dv*u_i_v2)**2 + (di_dr*u_c_r)**2)
+u_c_v2 = np.sqrt(u_i_v2**2 + u_j_voltimetro_2**2)
+
+u_c_i = np.sqrt((di_dv*u_c_v2)**2 + (di_dr*u_c_r)**2)
 
 ###############################################################################
 #   Potencia primera medición P1 = V1 * I_fuente
@@ -62,7 +64,7 @@ p2 = v2**2/r
 dp2_dv = 2*v2/r
 dp2_dr = -v2**2/r**2
 
-u_c_p2= np.sqrt((dp2_dv*u_i_v2)**2 + (dp2_dr*u_c_r)**2)
+u_c_p2= np.sqrt((dp2_dv*u_c_v2)**2 + (dp2_dr*u_c_r)**2)
 
 ###############################################################################
 #   Output

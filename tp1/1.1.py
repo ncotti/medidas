@@ -15,7 +15,7 @@ ic = 0.95               # intervalo de confianza 95%
 ###############################################################################
 u_i = s/np.sqrt(n)                                  # Incertidumbre tipo A, desvio de la media.
 
-u_j = 0.005 * 100.1 + 3/1001                        # Incetidumbre tipo B. Se asume que las cuentas totales son 1001 y la medición promedio fue 100.1
+u_j = (0.005 + 3/1001)*100.1                        # Incetidumbre tipo B. Se asume que las cuentas totales son 1001 y la medición promedio fue 100.1
 
 u_c = np.sqrt(u_i**2 + u_j**2 )                     # Incertidumbre combinada
 
